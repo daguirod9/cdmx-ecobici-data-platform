@@ -1,0 +1,24 @@
+name: 'ecobici_analytics'
+version: '1.0.0'
+config-version: 2
+profile: 'ecobici_duckdb'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target"]
+
+models:
+  ecobici_analytics:
+    bronze:
+      +materialized: view
+    silver:
+      +materialized: table
+    gold:
+      dims:
+        +materialized: table
+      facts:
+        +materialized: table
+      marts:
+        +materialized: table
