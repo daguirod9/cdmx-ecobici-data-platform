@@ -61,7 +61,16 @@ cd ../feast_repo/feature_repo && poetry run feast apply
 3. Incremental dbt models for silver/gold.
 4. Feast materialization jobs at aligned windows.
 
+## Target definition selected (implemented now)
+
+We use a **proxy target** from consecutive station snapshots:
+
+- `demand_departures_proxy = max(prev_bikes_available - bikes_available, 0)`
+- `supply_arrivals_proxy = max(prev_docks_available - docks_available, 0)`
+- `net_demand_pressure_proxy = demand_departures_proxy - supply_arrivals_proxy`
+
+See `docs/target_definition.md` for assumptions and migration to real trips.
+
 ## Open questions for the next iteration
 
-- Confirm canonical target variable for demand forecasting (e.g., trips proxy vs stock depletion proxy).
 - Confirm serving SLA for online features (hourly, every 15 min, or sub-5-min).
