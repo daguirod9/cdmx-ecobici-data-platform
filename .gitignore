@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.duckdb
+*.parquet
+.target/
+dbt/target/
+logs/
+.DS_Store
+.ipynb_checkpoints/
+data/

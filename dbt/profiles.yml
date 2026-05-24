@@ -1,0 +1,7 @@
+ecobici_duckdb:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "../data/ecobici.duckdb"
+      threads: 4
