@@ -15,7 +15,7 @@ pyarrow = "^20.0.0"
 pydantic = "^2.11.0"
 pydantic-settings = "^2.8.0"
 requests = "^2.32.3"
-tenacity = "^9.0.0"
+tenacity = ">=8.2,<9.0"
 feast = {extras = ["duckdb"], version = "^0.47.0"}
 jupyter = "^1.1.1"
 
