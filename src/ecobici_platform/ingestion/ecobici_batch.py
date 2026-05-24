@@ -29,7 +29,9 @@ class EcobiciBatchIngestionService:
         output: list[IngestionRecord] = []
         for endpoint in endpoints:
             payload = self.client.fetch(endpoint)
-            raw_path = self.sink.write(source_name="ecobici_gbfs", endpoint=endpoint, payload=payload)
+            raw_path = self.sink.write(
+                source_name="ecobici_gbfs", endpoint=endpoint, payload=payload
+            )
             output.append(
                 IngestionRecord(
                     endpoint=endpoint,

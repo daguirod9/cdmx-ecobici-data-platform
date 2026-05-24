@@ -3,7 +3,11 @@ from ecobici_platform.ingestion.ecobici_batch import EcobiciBatchIngestionServic
 
 class DummyClient:
     def fetch(self, endpoint: str) -> dict:
-        return {"last_updated": "2026-05-24T00:00:00Z", "endpoint": endpoint, "data": {"stations": []}}
+        return {
+            "last_updated": "2026-05-24T00:00:00Z",
+            "endpoint": endpoint,
+            "data": {"stations": []},
+        }
 
 
 class DummySink:
