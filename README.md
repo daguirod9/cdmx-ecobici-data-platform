@@ -79,6 +79,6 @@ See `docs/target_definition.md` for assumptions and migration to real trips.
 
 To avoid resolver failures caused by transitive incompatibilities (especially around Feast/dlt stacks),
 this project currently pins the runtime to **Python 3.11** (`>=3.11,<3.12`) and constrains
-`tenacity` to `<9.0` for `feast[duckdb]` compatibility.
+`tenacity` to `<9.0` and `pyarrow` to `<18.1` for `feast[duckdb]` (0.47.x) compatibility.
 
 If you need Python 3.12+, first validate a full dependency upgrade matrix in CI before widening constraints.
