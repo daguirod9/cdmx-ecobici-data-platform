@@ -42,18 +42,18 @@ cd dbt && poetry run dbt run --profiles-dir .
 cd ../feast_repo/feature_repo && poetry run feast apply
 ```
 
-## Instalación local (dependencias y entorno)
+## Local setup (dependencies and environment)
 
-Esta sección documenta una instalación reproducible para poder **ejecutar y probar** el proyecto localmente.
+This section documents a reproducible setup to **run and test** the project locally.
 
-### 1) Prerrequisitos del sistema
+### 1) System prerequisites
 
-- **Python 3.11.x** (requerido por las restricciones del proyecto).
-- **Poetry** (gestión de dependencias y entorno virtual).
+- **Python 3.11.x** (required by project constraints).
+- **Poetry** (dependency and virtual environment management).
 - **Git**.
-- (Opcional) **Docker y Docker Compose** para ejecución en contenedores.
+- (Optional) **Docker and Docker Compose** for containerized execution.
 
-Verifica versiones:
+Check installed versions:
 
 ```bash
 python3 --version
@@ -63,38 +63,38 @@ docker --version
 docker compose version
 ```
 
-> Recomendación: usar `pyenv` para fijar Python 3.11 sin afectar otros proyectos.
+> Recommendation: use `pyenv` to pin Python 3.11 without affecting other projects.
 
-### 2) Clonar el repositorio
+### 2) Clone the repository
 
 ```bash
-git clone <URL_DEL_REPO>
+git clone <REPO_URL>
 cd cdmx-ecobici-data-platform
 ```
 
-### 3) Configurar Python 3.11 para Poetry
+### 3) Configure Python 3.11 for Poetry
 
-Si tu sistema tiene múltiples versiones de Python:
+If your system has multiple Python versions:
 
 ```bash
 poetry env use python3.11
 ```
 
-Confirma el intérprete elegido:
+Confirm the selected interpreter:
 
 ```bash
 poetry env info
 ```
 
-### 4) Instalar dependencias del proyecto
+### 4) Install project dependencies
 
-Instala todas las dependencias declaradas en `pyproject.toml`:
+Install all dependencies declared in `pyproject.toml`:
 
 ```bash
 poetry install
 ```
 
-Si necesitas reinstalar desde cero (útil ante conflictos):
+If you need a clean reinstall (useful for conflict resolution):
 
 ```bash
 poetry env remove --all
@@ -102,24 +102,24 @@ poetry env use python3.11
 poetry install
 ```
 
-### 5) Verificar instalación mínima
+### 5) Run a minimal installation check
 
 ```bash
 poetry run python -c "import ecobici_platform; print('OK')"
 poetry run pytest -q
 ```
 
-Si ambos comandos pasan, el entorno local quedó listo.
+If both commands pass, your local environment is ready.
 
-## Cómo ejecutar el pipeline en local
+## How to run the pipeline locally
 
-### 1) Ingesta batch (API -> raw payloads / bronze)
+### 1) Batch ingestion (API -> raw payloads / bronze)
 
 ```bash
 poetry run python -m ecobici_platform.ingestion.ecobici_batch
 ```
 
-### 2) Transformaciones dbt (bronze -> silver -> gold)
+### 2) dbt transformations (bronze -> silver -> gold)
 
 ```bash
 cd dbt
@@ -128,7 +128,7 @@ poetry run dbt test --profiles-dir .
 cd ..
 ```
 
-### 3) Aplicar objetos de Feast (feature repo)
+### 3) Apply Feast objects (feature repo)
 
 ```bash
 cd feast_repo/feature_repo
@@ -136,46 +136,46 @@ poetry run feast apply
 cd ../..
 ```
 
-## Ejecutar pruebas en local
+## Run tests locally
 
-### Suite completa
+### Full test suite
 
 ```bash
 poetry run pytest
 ```
 
-### Suite rápida
+### Quick test suite
 
 ```bash
 poetry run pytest -q
 ```
 
-### Pruebas específicas de ingesta
+### Ingestion-focused tests
 
 ```bash
 poetry run pytest tests/test_ingestion_service.py -q
 ```
 
-## Flujo recomendado de validación local (antes de commit)
+## Recommended local validation flow (before commit)
 
 ```bash
 poetry run pytest -q
 cd dbt && poetry run dbt test --profiles-dir . && cd ..
 ```
 
-## Troubleshooting de dependencias
+## Dependency troubleshooting
 
-### Error por versión de Python incompatible
+### Incompatible Python version error
 
-Síntoma típico: Poetry rechaza instalación por rango de versión.
+Typical symptom: Poetry rejects installation because your Python version is outside the allowed range.
 
-Solución:
+Solution:
 
-1. Instalar Python 3.11.
-2. Ejecutar `poetry env use python3.11`.
-3. Reinstalar con `poetry install`.
+1. Install Python 3.11.
+2. Run `poetry env use python3.11`.
+3. Reinstall dependencies with `poetry install`.
 
-### Conflictos de resolución (lock desactualizado o entorno dañado)
+### Dependency resolution conflicts (stale lockfile or broken environment)
 
 ```bash
 poetry env remove --all
@@ -183,16 +183,16 @@ poetry cache clear pypi --all
 poetry install
 ```
 
-### `dbt` o `feast` no encontrados dentro del entorno
+### `dbt` or `feast` not found in the virtual environment
 
-Asegúrate de invocarlos con `poetry run`:
+Make sure to invoke them with `poetry run`:
 
 ```bash
 poetry run dbt --version
 poetry run feast version
 ```
 
-Si fallan, reinstala con `poetry install`.
+If they still fail, reinstall dependencies with `poetry install`.
 
 ## Gold layer star schema
 
