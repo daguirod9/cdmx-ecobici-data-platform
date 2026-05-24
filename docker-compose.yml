@@ -1,0 +1,6 @@
+services:
+  ecobici-platform:
+    build: .
+    volumes:
+      - .:/app
+    command: poetry run python -m ecobici_platform.ingestion.ecobici_batch
