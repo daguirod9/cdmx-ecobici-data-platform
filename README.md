@@ -74,3 +74,11 @@ See `docs/target_definition.md` for assumptions and migration to real trips.
 ## Open questions for the next iteration
 
 - Confirm serving SLA for online features (hourly, every 15 min, or sub-5-min).
+
+## Dependency compatibility policy
+
+To avoid resolver failures caused by transitive incompatibilities (especially around Feast/dlt stacks),
+this project currently pins the runtime to **Python 3.11** (`>=3.11,<3.12`) and constrains
+`tenacity` to `<9.0` for `feast[duckdb]` compatibility.
+
+If you need Python 3.12+, first validate a full dependency upgrade matrix in CI before widening constraints.

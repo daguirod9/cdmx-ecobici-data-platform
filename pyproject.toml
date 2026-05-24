@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{ include = "ecobici_platform", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
 dlt = "^1.10.0"
 duckdb = "^1.3.0"
 pandas = "^2.2.3"
