@@ -6,7 +6,9 @@ __pycache__/
 *.parquet
 .target/
 dbt/target/
+dbt/.user.yml
 logs/
 .DS_Store
 .ipynb_checkpoints/
 data/
+resources/raw_payloads/

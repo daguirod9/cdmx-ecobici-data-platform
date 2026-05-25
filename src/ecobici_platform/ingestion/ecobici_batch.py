@@ -2,6 +2,7 @@
 
 from collections.abc import Iterable
 from dataclasses import dataclass
+from pathlib import Path
 
 import dlt
 
@@ -56,10 +57,17 @@ def station_status_resource(records: list[IngestionRecord]):
             }
 
 
+def ensure_duckdb_parent_dir(duckdb_path: str) -> None:
+    """Create the database parent directory for first-time local runs."""
+    parent = Path(duckdb_path).expanduser().parent
+    parent.mkdir(parents=True, exist_ok=True)
+
+
 def run_batch_pipeline() -> None:
     service = EcobiciBatchIngestionService()
     records = service.run(["station_information.json", "station_status.json"])
 
+    ensure_duckdb_parent_dir(settings.duckdb_path)
     pipeline = dlt.pipeline(
         pipeline_name="ecobici_batch_pipeline",
         destination=dlt.destinations.duckdb(settings.duckdb_path),
